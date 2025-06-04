@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Feedback Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container { margin-top: 30px; }
+        .nav1 { color: #fff; }
+        .nav1:hover {
+            box-shadow: 0 8px 16px rgba(0, 123, 255, 0.3);
+            transform: translateY(-5px);
+            transition: all 0.3s ease;
+        }
+        form, table {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        th { background-color: #0d6efd; color: white; }
+    </style>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const regionSelect = document.getElementById("region");
+        const hospitalSelect = document.getElementById("hospital_name");
+        const feedbackForm = document.getElementById("feedbackForm");
+        const feedbackTable = document.getElementById("feedbackTable").getElementsByTagName("tbody")[0];
+
+        const hospitalsByRegion = {
+            "Coimbatore": ["KG Hospital", "PSG Hospital", "CMC Coimbatore"],
+            "Chennai": ["Apollo Hospital", "Fortis Hospital", "Stanley Hospital"],
+            "Madurai": ["Meenakshi Mission", "Velammal Hospital", "Rajaji Hospital"]
+        };
+
+        regionSelect.addEventListener("change", function() {
+            hospitalSelect.innerHTML = '<option value="">Select Hospital</option>';
+            const hospitals = hospitalsByRegion[regionSelect.value] || [];
+            hospitals.forEach(hospital => {
+                const option = document.createElement("option");
+                option.value = hospital;
+                option.textContent = hospital;
+                hospitalSelect.appendChild(option);
+            });
+        });
+
+        feedbackForm.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const feedbackData = {
+                patient_name: document.getElementById("patient_name").value,
+                region: regionSelect.value,
+                hospital_name: hospitalSelect.value,
+                disease: document.getElementById("disease").value,
+                surgeon_name: document.getElementById("surgeon_name").value,
+                treatment_date: document.getElementById("treatment_date").value,
+                treatment_cost: document.getElementById("treatment_cost").value,
+                feedback_score: document.getElementById("feedback_score").value,
+                recovered: document.getElementById("recovered").value,
+                comments: document.getElementById("comments").value
+            };
+
+            fetch("http://127.0.0.1:8001/api/submit/", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(feedbackData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message || "Feedback submitted successfully!");
+                feedbackForm.reset();
+                loadFeedbacks();
+            })
+            .catch(error => console.error("Error submitting feedback:", error));
+        });
+
+        function loadFeedbacks() {
+            fetch("http://127.0.0.1:8001/api/list/")
+            .then(response => response.json())
+            .then(data => {
+                feedbackTable.innerHTML = "";
+                data.forEach(feedback => {
+                    const row = feedbackTable.insertRow();
+                    row.innerHTML = `
+                        <td>${feedback.patient_name}</td>
+                        <td>${feedback.region}</td>
+                        <td>${feedback.hospital_name}</td>
+                        <td>${feedback.disease}</td>
+                        <td>${feedback.surgeon_name}</td>
+                        <td>${feedback.treatment_date}</td>
+                        <td>${feedback.treatment_cost}</td>
+                        <td>${feedback.feedback_score}</td>
+                        <td>${feedback.recovered}</td>
+                        <td>${feedback.comments}</td>
+                    `;
+                });
+            })
+            .catch(error => console.error("Error loading feedbacks:", error));
+        }
+
+        loadFeedbacks();
+    });
+    </script>
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+        <a href="index.html" class="nav1"><i class="bi bi-arrow-left"></i> Home</a>
+        <a class="navbar-brand" href="#" style="padding-right: 700px;">Hospital Feedback</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</nav>
+
+<div class="container mt-3">
+    <div class="card">
+        <div class="card-body">
+            <h2 class="card-title mb-4">Patient Feedback Form</h2>
+            <form id="feedbackForm">
+                <div class="mb-3">
+                    <label for="patient_name" class="form-label">Patient Name:</label>
+                    <input type="text" id="patient_name" class="form-control" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="region" class="form-label">Region:</label>
+                    <select id="region" class="form-select" required>
+                        <option value="">Select Region</option>
+                        <option value="Coimbatore">Coimbatore</option>
+                        <option value="Chennai">Chennai</option>
+                        <option value="Madurai">Madurai</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="hospital_name" class="form-label">Hospital Name:</label>
+                    <select id="hospital_name" class="form-select" required></select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="disease" class="form-label">Disease:</label>
+                    <select id="disease" class="form-select" required>
+                        <option value="">Select Disease</option>
+                        <option value="COVID-19">COVID-19</option>
+                        <option value="Dengue">Dengue</option>
+                        <option value="Malaria">Malaria</option>
+                        <option value="Typhoid">Typhoid</option>
+                        <option value="Chickenpox">Chickenpox</option>
+                        <option value="Cancer">Cancer</option>
+                        <option value="Asthma">Asthma</option>
+                        <option value="Diabetes">Diabetes</option>
+                        <option value="Hypertension">Hypertension</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="surgeon_name" class="form-label">Surgeon Name:</label>
+                    <input type="text" id="surgeon_name" class="form-control" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="treatment_date" class="form-label">Treatment Date:</label>
+                    <input type="date" id="treatment_date" class="form-control" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="treatment_cost" class="form-label">Treatment Cost:</label>
+                    <input type="number" id="treatment_cost" class="form-control" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="feedback_score" class="form-label">Feedback Score (1-5):</label>
+                    <input type="number" id="feedback_score" class="form-control" min="1" max="5" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="recovered" class="form-label">Recovered:</label>
+                    <select id="recovered" class="form-select" required>
+                        <option value="">Select Option</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="comments" class="form-label">Comments:</label>
+                    <textarea id="comments" class="form-control" rows="3" required></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-success w-100">Submit Feedback</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="mt-5">
+        <h2>Feedback List</h2>
+        <div class="table-responsive">
+            <table class="table table-bordered" id="feedbackTable">
+                <thead>
+                    <tr>
+                        <th>Patient Name</th>
+                        <th>Region</th>
+                        <th>Hospital Name</th>
+                        <th>Disease</th>
+                        <th>Surgeon Name</th>
+                        <th>Treatment Date</th>
+                        <th>Treatment Cost</th>
+                        <th>Feedback Score</th>
+                        <th>Recovered</th>
+                        <th>Comments</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

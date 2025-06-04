@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Health Insights & Feedback System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Custom Navbar Title */
+        .nav1 {
+            margin: auto;
+            font-size: 28px;
+            font-weight: bold;
+            font-family: 'Poppins', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            color: white;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(rgba(0, 123, 255, 0.6), rgba(0, 123, 255, 0.6)), url('https://images.unsplash.com/photo-1588776814546-ec3e5e40db36') center/cover no-repeat;
+            color: white;
+            padding: 100px 0;
+        }
+
+        /* Cards */
+        .card img {
+            margin-bottom: 20px;
+            border-radius: 10px;
+        }
+
+        .card-title {
+            font-size: 22px;
+            font-weight: 600;
+        }
+
+        .card-text {
+            min-height: 80px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #0d6efd;
+            padding: 15px 0;
+        }
+
+        /* Card hover effect */
+    .card:hover {
+        box-shadow: 0 8px 16px rgba(0, 123, 255, 0.3); /* Add blue shadow */
+        transform: translateY(-5px); /* Slight lift */
+        transition: all 0.3s ease;
+        border: 1px solid #0d6efd; /* Bootstrap primary color border */
+    }
+
+
+
+    /*Bed hospital-bed-availability*/
+        h2 {
+            color: #333;
+        }
+        select, p {
+            margin-top: 10px;
+            font-size: 18px;
+        }
+        select {
+            padding: 5px;
+            width: 200px;
+        }
+        #bedInfo {
+            margin-top: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 0 8px gray;
+            width: 300px;
+        }
+        .hospital-bed-availability {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            font-family: Arial, sans-serif;
+            margin: 30px;
+            background-color: #f2f2f2;
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <p class="nav1">Intelligent Healthcare Analytics</p>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section text-center">
+        <div class="container">
+            <h1 class="display-5 fw-bold">Welcome to Intelligent Healthcare Analytics</h1>
+            <p class="lead mb-4">Empowering you with smarter healthcare decisions. Explore surveys, dashboards, and health assistance — all in one platform.</p>
+            <a href="#modules" class="btn btn-light btn-lg">About Us ➔</a>
+        </div>
+    </section>
+
+    <!-- Modules Section -->
+    <section id="modules" class="py-5">
+        <div class="container">
+            <div class="row g-4 text-center">
+              
+                <!-- Patient Survey Card -->
+                <div class="col-md-4">
+                    <div class="card h-100 shadow rounded-4">
+                        <div class="card-body d-flex flex-column align-items-center">
+                            <img src="https://media.istockphoto.com/id/1151608262/vector/illustration-icon-with-the-concept-of-looking-for-health-information-by-consulting-a-doctor.jpg?s=612x612&w=0&k=20&c=HFCQsZYEGfNgGbpzggQzJM3nGXujeGw0cmXKeOGxa-Q=" alt="Patient Survey Logo" style="width: 100px; height: 100px;">
+                            <h5 class="card-title mt-3">Patient Survey</h5>
+                            <p class="card-text">Provide feedback on healthcare experiences to help improve services.</p>
+                            <a href="PatientSurvey.html" class="btn btn-outline-primary mt-auto">Explore</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Health Dashboard Card -->
+                <div class="col-md-4">
+                    <div class="card h-100 shadow rounded-4">
+                        <div class="card-body d-flex flex-column align-items-center">
+                            <img src="https://static.vecteezy.com/system/resources/previews/020/274/037/large_2x/dashboard-icon-for-your-website-design-logo-app-ui-free-vector.jpg" alt="Health Dashboard Logo" style="width: 100px; height: 100px;">
+                            <h5 class="card-title mt-3">Health Dashboard</h5>
+                            <p class="card-text">View personalized health statistics and insights in one place.</p>
+                            <a href="#" class="btn btn-outline-primary mt-auto">Explore</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- HealthAssist Card -->
+                <div class="col-md-4">
+                    <div class="card h-100 shadow rounded-4">
+                        <div class="card-body d-flex flex-column align-items-center">
+                            <img src="https://img.freepik.com/premium-vector/logo-featuring-cross-blue-green-colors-invent-simple-logo-virtual-healthcare-assistant-minimalist-simple-modern-vector-logo-design_538213-48591.jpg?w=826" alt="Health Assist Logo" style="width: 100px; height: 100px;">
+                            <h5 class="card-title mt-3">HealthAssist</h5>
+                            <p class="card-text">Get assistance for common health issues and quick health tips.</p>
+                            <a href="https://www.chatbase.co/chatbot-iframe/l3yo5exwiEGFpH5-_rbrM" class="btn btn-outline-primary mt-auto" onclick="openChatbot(); return false;">Explore</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+
+    <div class="hospital-bed-availability">
+        <h2>🏥 Hospital Bed Availability Checker</h2>
+
+        <label for="districtSelect">Select District:</label><br>
+        <select id="districtSelect">
+            <option value="">--Select District--</option>
+            <option value="Coimbatore">Coimbatore</option>
+            <option value="Chennai">Chennai</option>
+            <option value="Madurai">Madurai</option>
+            <option value="Tirunelveli">Tirunelveli</option>
+        </select>
+
+        <br><br>
+
+        <label for="hospitalSelect">Select Hospital:</label><br>
+        <select id="hospitalSelect">
+            <option value="">--Select Hospital--</option>
+        </select>
+
+        <div id="bedInfo">
+            <p id="totalBeds"></p>
+            <p id="vacantBeds"></p>
+        </div>
+    </div>
+
+
+
+
+    <!-- Footer -->
+    <footer class="text-white text-center">
+        <p class="mb-0">&copy; 2025 Smart Health Insights. All rights reserved.</p>
+    </footer>
+
+    <!--Chatbot Script-->
+    <script>
+        (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized")
+        {window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}
+        window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,
+        {get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}
+        const onLoad=function(){const script=document.createElement("script");
+        script.src="https://www.chatbase.co/embed.min.js";script.id="l3yo5exwiEGFpH5-_rbrM";script.domain="www.chatbase.co";
+        document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+
+
+
+
+
+/*Bed hospital-bed-availability*/
+        document.addEventListener("DOMContentLoaded", function() {
+    const districtSelect = document.getElementById('districtSelect');
+    const hospitalSelect = document.getElementById('hospitalSelect');
+    const totalBedsElem = document.getElementById('totalBeds');
+    const vacantBedsElem = document.getElementById('vacantBeds');
+
+    districtSelect.addEventListener('change', function() {
+        const selectedDistrict = districtSelect.value;
+
+        hospitalSelect.innerHTML = '<option value="">--Select Hospital--</option>';
+        totalBedsElem.textContent = '';
+        vacantBedsElem.textContent = '';
+
+        if (selectedDistrict) {
+            fetch(`http://127.0.0.1:8000/api/hospitals/?district=${selectedDistrict}`)
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach(hospital => {
+                        const option = document.createElement('option');
+                        option.value = hospital.id;
+                        option.textContent = hospital.name;
+                        hospitalSelect.appendChild(option);
+                    });
+                })
+                .catch(error => console.error('Error fetching hospitals:', error));
+        }
+    });
+
+    hospitalSelect.addEventListener('change', function() {
+        const hospitalId = hospitalSelect.value;
+
+        if (hospitalId) {
+            fetch(`http://127.0.0.1:8000/api/hospitals/${hospitalId}/`)
+                .then(response => response.json())
+                .then(data => {
+                    totalBedsElem.textContent = `Total Beds: ${data.total_beds}`;
+                    vacantBedsElem.textContent = `Vacant Beds: ${data.vacant_beds}`;
+                })
+                .catch(error => console.error('Error fetching hospital details:', error));
+        } else {
+            totalBedsElem.textContent = '';
+            vacantBedsElem.textContent = '';
+        }
+    });
+});
+
+
+
+
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
